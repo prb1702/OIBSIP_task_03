@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="head">
+            <span id="txt">Temperature Converter</span>
+        </div>
+        
+        <div class="content">
+            <div class="temperature">
+                <label for="temp">Enter the temperature to convert : </label>
+                <input type="number" id="temp" name="temper" placeholder="Enter temperature">
+
+                <select name="temp_con" id="temp_con">
+                    <option value="celcius">Celcius</option>
+                    <option value="far">Farheneit</option>
+                    <option value="kel">Kelvin</option>
+                </select>
+            </div>
+
+            <div class="button">
+                <button id="btn"  onclick="calculateTemp()">Convert</button>
+            </div>
+            <br/>
+            <span class="one" id="op"></span>
+            <span class="res" id="result"></span>
+            <br/>
+            <span class="one" id="op1"></span>
+            <span class="res" id="result1"></span>
+        </div>
+    </div>
+    <script>
+        let newtemp;
+        function celtofar(tem){
+            newtemp = (parseFloat((parseInt(tem) * 9)/5+32));   //(parseInt(tem)-10);
+            return parseFloat(newtemp.toFixed(3));
+        }
+
+        function celToK(tem){
+            newtemp = parseFloat(tem)+273.15;
+            return parseFloat(newtemp.toFixed(3));
+        }
+
+        function fartocel(tem){
+            newtemp = (parseFloat((parseInt(tem)-32)*5)/9);
+            return parseFloat(newtemp.toFixed(3));
+        }
+
+        function farToK(tem){
+            newtemp =(parseFloat((parseInt(tem)-32)*5)/9 + 273.15);
+            return parseFloat(newtemp.toFixed(3));
+        }
+
+        function KtoCel(tem){
+            newtemp =(parseFloat(tem)-273.15);
+            return parseFloat(newtemp.toFixed(3));
+        }
+        
+        // (K − 273.15) × 9/5 + 32 = °F.
+        function KtoFar(tem){
+            newtemp =(parseFloat(tem)-273.15)*9/5 + 32;
+            return parseFloat(newtemp.toFixed(3));
+        }
+
+        function calculateTemp()
+        {
+            let temp = document.getElementById('temp').value;
+            console.log(temp);
+
+            let opt = document.getElementById('temp_con');
+            let ind = temp_con.options[opt.selectedIndex].value;
+            console.log(ind);
+            let ans;
+
+            if(ind == 'celcius')
+            {
+                let result = celtofar(temp);
+                ans = celToK(temp);
+                document.getElementById('op').innerHTML = "Temperature in Farheneit is : ";
+                document.getElementById('result').innerHTML = `${result} °Farheneit`;
+                document.getElementById('op1').innerHTML = "Temperature in Kelvin is : ";
+                document.getElementById('result1').innerHTML = `${ans} K`;
+            }
+            else if(ind == 'far')
+            {
+                let result = fartocel(temp);
+                ans = farToK(temp);
+                document.getElementById('op').innerHTML = "Temperature in Celcius is : ";
+                document.getElementById('result').innerHTML = `${result} °Celcius`;
+                document.getElementById('op1').innerHTML = "Temperature in Kelvin is : ";
+                document.getElementById('result1').innerHTML = `${ans} K`;
+            }
+            else{
+                let result = KtoCel(temp);
+                ans = KtoFar(temp);
+                document.getElementById('op').innerHTML = "Temperature in Celcius is : ";
+                document.getElementById('result').innerHTML = `${result} °Celcius`;
+                document.getElementById('op1').innerHTML = "Temperature in Fahrenheit is : ";
+                document.getElementById('result1').innerHTML = `${ans} °Farheneit`;
+            }
+        }
+    </script>
+</body>
+</html>
